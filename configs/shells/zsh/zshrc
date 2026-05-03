@@ -1,0 +1,134 @@
+# ~/.zshrc — starter config with sensible defaults
+# ─────────────────────────────────────────────────────────────────────────────
+# Skip in non-interactive shells
+[[ $- != *i* ]] && return
+
+# Use custom SSH agent socket if it exists, overriding any existing agent
+standard_agent="$HOME/.ssh/custom-agent.sock"
+
+if [[ -S "$standard_agent" ]]; then
+  export SSH_AUTH_SOCK="$standard_agent"
+fi
+
+# ─── XDG Base Directories ────────────────────────────────────────────────────
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+# Keep $HOME tidy: stash zsh state under XDG dirs
+export ZDOTDIR="${ZDOTDIR:-$HOME}"
+ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+[[ -d $ZSH_CACHE_DIR ]] || mkdir -p "$ZSH_CACHE_DIR"
+
+# ─── Environment ─────────────────────────────────────────────────────────────
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="$EDITOR"
+export PAGER="${PAGER:-less}"
+export LESS="-R -F -X -i -M"          # color, quit-if-one-screen, no-init, smart case, status
+export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
+export LANG="${LANG:-en_US.UTF-8}"
+export LC_ALL="${LC_ALL:-en_US.UTF-8}"
+export NH_FLAKE="$HOME/nixos"
+
+# ─── PATH (dedup, prepend common dirs) ───────────────────────────────────────
+typeset -U path PATH                  # auto-dedup
+path=(
+  "$HOME/.local/bin"
+  "$HOME/bin"
+  /opt/homebrew/bin
+  /opt/homebrew/sbin
+  $path
+)
+export PATH
+
+# ─── History ─────────────────────────────────────────────────────────────────
+HISTFILE="$ZSH_CACHE_DIR/history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY               # timestamp entries
+setopt INC_APPEND_HISTORY             # write as you go
+setopt SHARE_HISTORY                  # share across sessions
+setopt HIST_IGNORE_DUPS               # no consecutive dupes
+setopt HIST_IGNORE_ALL_DUPS           # remove older dupes
+setopt HIST_IGNORE_SPACE              # ignore commands starting with space
+setopt HIST_REDUCE_BLANKS             # trim whitespace
+setopt HIST_VERIFY                    # show !! expansion before running
+setopt HIST_FIND_NO_DUPS
+
+# ─── Directory navigation ────────────────────────────────────────────────────
+setopt AUTO_CD                        # `foo` == `cd foo` if foo is a dir
+setopt AUTO_PUSHD                     # cd pushes onto dir stack
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+DIRSTACKSIZE=20
+
+# ─── Globbing & misc shell behavior ──────────────────────────────────────────
+setopt EXTENDED_GLOB                  # ^, ~, # globs
+setopt GLOB_DOTS                      # match dotfiles without explicit .
+setopt NO_CASE_GLOB                   # case-insensitive globbing
+setopt INTERACTIVE_COMMENTS           # allow # comments at prompt
+setopt NO_BEEP
+setopt NOTIFY                         # report bg job status immediately
+setopt LONG_LIST_JOBS
+
+# ─── Completion ──────────────────────────────────────────────────────────────
+# Use XDG path for compdump and keep compaudit checks active.
+autoload -Uz compinit
+ZSH_COMPDUMP="$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
+compinit -u -d "$ZSH_COMPDUMP"
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/zcompcache"
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:warnings' format 'No matches: %d'
+
+# ─── Key bindings ────────────────────────────────────────────────────────────
+bindkey -e                            # emacs keymap (swap to -v if you prefer vi)
+bindkey '^[[A' up-line-or-search      # arrow-up: prefix search history
+bindkey '^[[B' down-line-or-search
+bindkey '^R'   history-incremental-search-backward
+bindkey '^[[1;5C' forward-word        # Ctrl-Right
+bindkey '^[[1;5D' backward-word       # Ctrl-Left
+
+# ─── Aliases ─────────────────────────────────────────────────────────────────
+alias ls='ls -G'                      # color on macOS
+alias ll='ls -lhG'
+alias la='ls -lhAG'
+alias l='ls -CF'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color=auto'
+alias mkdir='mkdir -pv'
+alias df='df -h'
+alias du='du -h'
+alias g='git'
+alias ip='ip -c'
+
+# ─── Helpers ─────────────────────────────────────────────────────────────────
+# mkdir + cd
+mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
+
+# ─── Nix ─────────────────────────────────────────────────────────────────────
+# Nix flake refs use `#`, `?`, and other glob-meaningful chars (e.g.
+# `nixpkgs#hello`, `.#packages.x86_64-linux.foo`). Wrap nix commands in
+# `noglob` so zsh doesn't try to expand them.
+#
+# NOTE: this must be done with aliases, not a function. Aliases expand
+# before parsing, so `noglob` suppresses globbing on the rest of the line.
+# A function receives its arguments *after* glob expansion has already
+# failed, so it can't help here.
+#
+# The single `nix` alias covers all Nix 3 subcommands (`nix run`,
+# `nix shell`, `nix build`, `nix develop`, `nix flake …`, etc.) because
+# `noglob` applies to the whole command line. We additionally alias every
+# legacy `nix-*` binary found on $PATH, plus a few common companions.
+() {
+  local cmd
+  for cmd in nix ${(o)$(whence -m 'nix-*' 2>/dev/null)} nixos-rebuild home-manager darwin-rebuild; do
+    (( $+commands[$cmd] )) && alias -- "$cmd=noglob $cmd"
+  done
+}

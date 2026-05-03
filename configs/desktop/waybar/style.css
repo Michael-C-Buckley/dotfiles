@@ -1,0 +1,131 @@
+* {
+    min-height: 0;
+    min-width: 0;
+    font-family: "Cascadia Code NF";
+    font-size: 12px;
+    font-weight: 700;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+window#waybar {
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    background-color: #1d1f21;
+}
+
+#niri-window {
+    transition-property: opacity;
+    transition-duration: 0.4s;
+}
+
+#workspaces button {
+    padding: 0.3rem 0.6rem;
+    margin: 0.4rem 0.25rem;
+    border-radius: 25px;
+    /* background-color: #181825; */
+    background-color: #1d1f21;
+    color: #c4c8c5;
+}
+
+#workspaces button:hover {
+    color: #c4c8c5;
+    background-color: #1d1f21;
+    transition-duration: 0.4s;
+}
+
+#workspaces button.active {
+    background-color: #c4c8c5;
+    color: #1d1f21;
+    transition-duration: 0.4s;
+}
+
+#workspaces button.urgent {
+    background-color: #1d1f21;
+    color: #bc5e5e;
+}
+#clock,
+#pulseaudio,
+#custom-logo,
+#custom-power,
+#custom-spotify,
+#custom-dunst,
+#cpu,
+#tray,
+#memory,
+#window,
+#battery,
+#mpris {
+    padding: 0.3rem 0.6rem;
+    margin: 0.4rem 0.25rem;
+    border-radius: 15px;
+    /* background-color: #181825; */
+    background-color: #1d1f21;
+}
+
+#mpris.playing {
+    color: #c4c8c5;
+}
+
+#mpris.paused {
+    color: #707270;
+}
+
+#custom-sep {
+    padding: 0px;
+    color: #585b70;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
+
+#cpu {
+    color: #94e2d5;
+}
+
+#memory {
+    color: #cba6f7;
+}
+
+#clock {
+    color: #c4c8c5;
+}
+
+#clock.simpleclock {
+    color: #c4c8c5;
+}
+
+#battery {
+    color: #c4c8c5;
+}
+
+#window {
+    color: #c4c8c5;
+}
+
+#pulseaudio {
+    color: #c4c8c5;
+}
+
+#pulseaudio.muted {
+    color: #707270;
+}
+
+#custom-logo {
+    color: #89b4fa;
+}
+
+#custom-power {
+    color: #c4c8c5;
+}
+
+#tray {
+    color: #c4c8c5;
+}
+
+tooltip {
+    background-color: #181825;
+    border: 2px #89b4fa;
+    border-radius: 6px;
+}

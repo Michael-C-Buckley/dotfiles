@@ -1,0 +1,64 @@
+
+  input {
+    disable-power-key-handling
+    touchpad {
+        tap
+        dwt
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+  }
+
+  gestures {
+    hot-corners { off; }
+  }
+
+  prefer-no-csd
+
+  layout {
+    gaps 16
+    center-focused-column "never"
+    default-column-width { proportion 0.75; }
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 0.75
+    }
+
+    border { off; }
+    focus-ring {
+        width 4
+        active-color "#2d6981ab"
+        inactive-color "#595959aa"
+        urgent-color "#9b0000"
+    }
+  }
+
+  hotkey-overlay { skip-at-startup; }
+
+  cursor {
+    xcursor-theme "Nordzy-cursors-white"
+    xcursor-size 24
+  }
+
+  window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+  }
+
+  animations {
+    off
+  }
+
+  binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // LAUNCH
+    Mod+Return hotkey-overlay-title="Terminal: ghostty" { spawn "ghostty"; }
+    Mod+Ctrl+Return { spawn "kitty"; }
+    Mod+B hotkey-overlay-title="Browser: Helium" { spawn "helium"; }
+    Mod+D hotkey-overlay-title="Editor: Zed" { spawn "zeditor"; }
+    Mod+Ctrl+D {spawn "code"; }
+  }
+
+include "binds.kdl"
+include optional=true "host.kdl"

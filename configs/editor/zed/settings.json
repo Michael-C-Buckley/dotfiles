@@ -1,0 +1,87 @@
+{
+  "agent_buffer_font_size": 14.0,
+  "agent_ui_font_size": 14.0,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "buffer_font_weight": 400,
+  "diagnostics": { "inline": { "enabled": true, "min_column": 80 } },
+  "git": { "git_gutter": "tracked_files" },
+  "auto_install_extensions": {
+    "html": true,
+    "lua": true,
+    "nix": true,
+    "toml": true,
+  },
+  "languages": {
+    "YAML": {
+      "format_on_save": "off",
+    },
+    "JSON": {
+      "formatter": {
+        "external": {
+          "arguments": ["format", "--stdin-file-path", "{buffer_path}"],
+          "command": "biome",
+        },
+      },
+    },
+    "Nix": {
+      "formatter": {
+        "external": { "arguments": ["--quiet", "--"], "command": "alejandra" },
+      },
+      "language_servers": ["nixd"],
+    },
+  },
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
+  "telemetry": { "diagnostics": false, "metrics": false },
+  "toolbar": { "code_actions": true },
+  "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "openrouter",
+      "model": "x-ai/grok-4.3",
+      "enable_thinking": true,
+    },
+    "dock": "right",
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "claude-opus-4.7",
+        "enable_thinking": true,
+        "effort": "medium",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-3.1-pro-preview",
+        "enable_thinking": true,
+        "effort": "high",
+      },
+    ],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "ui_font_size": 14.0,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+}
