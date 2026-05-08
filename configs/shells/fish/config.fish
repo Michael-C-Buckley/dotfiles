@@ -22,6 +22,7 @@ fish_add_path -g /opt/homebrew/bin
 fish_add_path -g /opt/homebrew/sbin
 
 # ── SSH  ─────────────────────────────────────────────────────────────────────
+# Prefer a custom agent if my socket isn't already set
 set standard_agent "$HOME/.ssh/custom-agent.sock"
 
 if not set -q SSH_AUTH_SOCK
@@ -32,6 +33,7 @@ end
 
 # Dynamic set the signing key I use
 if set -q SSH_AUTH_SOCK
+  ssh-add
   set signing_pubkey (ssh-add -L | grep Github | head -n1)
 
   if test -n "$signing_pubkey"
@@ -80,6 +82,8 @@ abbr -a gco git checkout
 abbr -a gb  git branch
 abbr -a gr  git remote
 abbr -a grv git remote -v
+
+abbr -a nv nvim
 
 # ── Tool integrations (loaded only if installed) ─────────────────────────────
 if type -q starship; and not set -q FISH_NO_STARSHIP
