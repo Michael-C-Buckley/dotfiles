@@ -9,25 +9,36 @@ local palette = {
   },
 }
 
+function hl(name, set)
+  vim.api.nvim_set_hl(0, name, set)
+end
+
 palette = palette.main
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = { "quiet", "lackluster*" }, -- or a specific scheme name like "gruvbox"
+  pattern = { "quiet", "lackluster*", "default" }, -- or a specific scheme name like "gruvbox"
   callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { fg = palette.primary })
+    hl("Normal", { fg = palette.primary })
 
-    vim.api.nvim_set_hl(0, "Comment", { fg = palette.primary_dark })
-    vim.api.nvim_set_hl(0, "@comment", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "rustCommentLineDoc", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "LineNr", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "LineNrAbove", { link = "Comment" })
-    vim.api.nvim_set_hl(0, "LineNrBelow", { link = "Comment" })
+    hl("Comment", { fg = palette.primary_dark })
+    hl("@comment", { link = "Comment" })
+    hl("rustCommentLineDoc", { link = "Comment" })
+    hl("LineNr", { link = "Comment" })
+    hl("LineNrAbove", { link = "Comment" })
+    hl("LineNrBelow", { link = "Comment" })
 
-    vim.api.nvim_set_hl(0, "Directory", { fg = palette.accent })
-    vim.api.nvim_set_hl(0, "String", { fg = palette.accent })
-    vim.api.nvim_set_hl(0, "@string", { link = "String" })
-    vim.api.nvim_set_hl(0, "TODO", { fg = palette.red })
-    vim.api.nvim_set_hl(0, "MatchParen", { fg = palette.red })
+    hl("Directory", { fg = palette.accent })
+    hl("String", { fg = palette.accent })
+    hl("@string", { link = "String" })
+    hl("TODO", { fg = palette.red })
+    hl("MatchParen", { fg = palette.red })
+
+    -- hl("MiniTablineCurrent", { fg = palette.
+    --- - `MiniTablineVisible` - buffer is visible (displayed in some window).
+    --- - `MiniTablineHidden` - buffer is hidden (not displayed).
+    --- - `MiniTablineModifiedCurrent` - buffer is modified and current.
+    --- - `MiniTablineModifiedVisible` - buffer is modified and visible.
+    --- - `MiniTablineModifiedHidden` - buffer is modified and hidden.
 
     vim.api.nvim_set_hl(
       0,
@@ -35,11 +46,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       { bg = palette.red, fg = "#000000" }
     )
 
-    vim.api.nvim_set_hl(0, "Visual", { bg = "#333333" })
-    vim.api.nvim_set_hl(0, "QuickFixLine", { link = "Visual" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0A0A0A" })
-    vim.api.nvim_set_hl(0, "StatusLine", { bg = "#111111" })
-    vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#222222" })
+    hl("Visual", { bg = "#333333" })
+    hl("QuickFixLine", { link = "Visual" })
+    hl("NormalFloat", { bg = "#0A0A0A" })
+    hl("StatusLine", { bg = "#111111" })
+    hl("ColorColumn", { bg = "#222222" })
 
     vim.api.nvim_set_hl(
       0,

@@ -9,8 +9,9 @@ else
   require("lackluster")
   require("ayu")
 
-  vim.cmd.colorscheme("quiet")
+  -- vim.cmd.colorscheme("quiet")
   -- vim.cmd.colorscheme("lackluster")
+  -- vim.cmd.colorscheme("default")
 
   -- === Options ===
   vim.diagnostic.config({ virtual_lines = { current_line = true } })

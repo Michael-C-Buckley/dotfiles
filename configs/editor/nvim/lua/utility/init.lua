@@ -3,7 +3,6 @@ vim.pack.add({
 })
 
 require("utility.autocmds")
-require("utility.blink")
 require("utility.conform")
 require("utility.diagnostics")
 require("utility.oil")
