@@ -16,7 +16,7 @@ end
 palette = palette.main
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = { "quiet", "lackluster*", "default" }, -- or a specific scheme name like "gruvbox"
+  pattern = { "quiet" },
   callback = function()
     hl("Normal", { fg = palette.primary })
 

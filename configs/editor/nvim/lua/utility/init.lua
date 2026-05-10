@@ -3,8 +3,9 @@ vim.pack.add({
 })
 
 require("utility.autocmds")
-require("utility.conform")
+require("utility.completion")
 require("utility.diagnostics")
+require("utility.format")
 require("utility.oil")
 require("utility.terminal")
 require("utility.vim")

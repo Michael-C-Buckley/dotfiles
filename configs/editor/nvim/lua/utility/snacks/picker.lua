@@ -12,7 +12,7 @@ end
 -- Files
 bind_picker("<leader><space>", picker.smart, "Smart find files")
 bind_picker("<leader>f", picker.files, "Find files")
-bind_picker("<leader>r", picker.recent, "Recent files")
+-- bind_picker("<leader>r", picker.recent, "Recent files")
 bind_picker("<leader>e", picker.explorer, "File Explorer")
 bind_picker("<leader>q", picker, "Browse Pickers")
 
