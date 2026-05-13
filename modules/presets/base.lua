@@ -1,7 +1,7 @@
 local profile = require("rootbeer.profile")
 local rb = require("rootbeer")
 
-local apps = {"fastfetch", "zed"}
+local apps = {"fastfetch", "zed", "helix"}
 local shells = {"bash", "fish", "nushell", "starship", "zsh"}
 local terminals = {"kitty", "ghostty"}
 

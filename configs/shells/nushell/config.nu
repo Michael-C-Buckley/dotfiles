@@ -80,7 +80,7 @@ $env.config = {
 }
 
 # ── SSH  ─────────────────────────────────────────────────────────────────────
-let standard_agent = ($env.HOME | path join ".ssh/custom-agent.sock")
+let standard_agent = ($env.HOME | path join ".ssh/agent/internal.sock")
 
 if ($standard_agent | path exists) and (($standard_agent | path type) == "symlink" or ($standard_agent | path type) == "file") {
     $env.SSH_AUTH_SOCK = $standard_agent

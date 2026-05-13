@@ -23,21 +23,11 @@ fish_add_path -g /opt/homebrew/sbin
 
 # ── SSH  ─────────────────────────────────────────────────────────────────────
 # Prefer a custom agent if my socket isn't already set
-set standard_agent "$HOME/.ssh/custom-agent.sock"
+set standard_agent "$HOME/.ssh/agent/internal.sock"
 
 if not set -q SSH_AUTH_SOCK
   if test -S $standard_agent
     set -gx SSH_AUTH_SOCK $standard_agent
-  end
-end
-
-# Dynamic set the signing key I use
-if set -q SSH_AUTH_SOCK
-  ssh-add
-  set signing_pubkey (ssh-add -L | grep Github | head -n1)
-
-  if test -n "$signing_pubkey"
-    echo $signing_pubkey > ~/.ssh/git_signing.pub
   end
 end
 
