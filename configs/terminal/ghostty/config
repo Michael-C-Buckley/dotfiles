@@ -1,8 +1,11 @@
 cursor-color = #44A3A3
 cursor-opacity = 0.6
 font-family = Cascadia Code NF
-font-size = 13
-theme = Apple System Colors Light
-window-theme = system
+font-size = 14
+background = #000000
 keybind = performable:ctrl+shift+h=previous_tab
 keybind = performable:ctrl+shift+l=next_tab
+font-thicken = true
+font-thicken-strength = 155
+command = /opt/homebrew/bin/fish
+    

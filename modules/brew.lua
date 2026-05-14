@@ -2,14 +2,11 @@ local brew = require("rootbeer.brew")
 local profile = require("rootbeer.profile")
 
 local commone_formulae = {
-    "gnupg",
     "lima",
-    "openssh",
     "sops",
     "age",
     "age-plugin-se",
     "age-plugin-yubikey",
-    "openssh",
     "fastfetch",
     "direnv"
 }
@@ -43,7 +40,6 @@ brew.config({
         "fzf",
         "git",
         "git-delta",
-        "openssh",
         "jq",
         "make",
         "opencode",
