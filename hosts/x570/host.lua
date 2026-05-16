@@ -1,5 +1,6 @@
 local rb = require("rootbeer")
 require("modules.presets.linux")
+require("modules.desktop.hyprland")
 
--- Mango Host File
 rb.link_file("hosts/x570/mango.conf", "~/.config/mango/host.conf")
+rb.link("hosts/x570/hyprland.lua", "~/.config/hypr/host.lua")
