@@ -5,7 +5,7 @@ local terminal = "kitty"
 local terminal2 = "ghostty"
 local browser = "helium"
 local browser2 = "librewolf"
-local menu = "bemenu-run -l 10 -p Run"
+local menu = "wmenu-run"
 local fileManager = "thunar"
 
 for i = 1, 10 do
