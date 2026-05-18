@@ -14,7 +14,7 @@ git.config({
   editor = "nvim",
   pager = "delta",
   signing = {
-    key = "~/.ssh/git_signing.pub",
+    key = "~/.ssh/active/signing.pub",
     format = "ssh",
   },
   pull_rebase = true,

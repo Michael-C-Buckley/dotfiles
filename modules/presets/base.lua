@@ -3,7 +3,7 @@ local rb = require("rootbeer")
 
 local apps = {"fastfetch", "zed", "helix"}
 local shells = {"bash", "fish", "nushell", "starship", "zsh"}
-local terminals = {"kitty", "ghostty"}
+local terminals = {"kitty"}
 
 function import_items(family, dir)
     for i, v in ipairs(family) do
