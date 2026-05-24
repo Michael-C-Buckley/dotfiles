@@ -1,9 +1,9 @@
 # Derivation produces the Rootbeer-derived configs
 {
+  inputs,
   pkgs,
   hostname,
-  username,
-  inputs,
+  username ? "michael",
 }: let
   USER = username;
 in

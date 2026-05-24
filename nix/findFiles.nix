@@ -2,7 +2,7 @@
 # My intended use is to create github:feel-co/smfh compatible manifests for linking
 {
   dir,
-  username,
+  username ? "michael",
 }: let
   recurse = prefix: path: let
     entries = builtins.readDir path;

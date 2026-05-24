@@ -1,9 +1,9 @@
 # Finalize the manifest.json needed for smfh to link the files
 {
+  inputs,
   pkgs,
   hostname,
-  username,
-  inputs,
+  username ? "michael",
 }: let
   dir = import ./configs.nix {
     inherit pkgs hostname username inputs;
