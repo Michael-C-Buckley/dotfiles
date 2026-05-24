@@ -5,7 +5,7 @@
   hostname,
   username ? "michael",
 }: let
-  dir = import ./configs.nix {
+  dir = import ./config.nix {
     inherit pkgs hostname username inputs;
   };
 in
