@@ -10,7 +10,7 @@ in
   pkgs.stdenv.mkDerivation {
     name = "rootbeer-configs";
 
-    src = inputs.self;
+    src = ../.;
     dontUnpack = true;
     dontExtract = true;
 
