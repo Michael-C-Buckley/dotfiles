@@ -72,6 +72,6 @@ in
 
       # Create a nix manifest
       cp $out/manifest.json $TMPDIR/manifest.json
-      nix eval --impure --expr "builtins.toJSON(builtins.readFile \"$TMPDIR/manifest.json\")" --extra-experimental-features nix-command > $out/manifest.nix
+      nix eval --impure --expr "builtins.toJSON(builtins.readFile \"$TMPDIR/manifest.json\")" --extra-experimental-features nix-command > $out/default.nix
     '';
   }
