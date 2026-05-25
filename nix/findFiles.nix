@@ -21,7 +21,7 @@
       else [
         {
           target = "/home/${username}/${relPath}";
-          sources = builtins.toString child;
+          sources = toString child;
           type = "symlink";
         }
       ];
