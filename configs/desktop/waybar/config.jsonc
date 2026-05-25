@@ -1,121 +1,37 @@
 {
-  "layer": "top",
   "position": "top",
-  "height": 37,
-  "spacing": 3,
-  "exclusive": true,
-  "gtk-layer-shell": true,
-  "passthrough": false,
-  "fixed-center": true,
-  "modules-left": ["niri/workspaces", "niri/window",],
-  "modules-center": ["mpris"],
-  "modules-right": [
-    "pulseaudio",
-    "clock",
-    "clock#simpleclock",
-    "battery",
+  "margin-top": 12,
+
+  "modules-center": [
     "tray",
-    "custom/dunst",
-    "custom/power",
+    "clock",
+    "custom/media",
+    "hyprland/workspaces",
+    "pulseaudio",
+    "network",
+    "battery"
   ],
-  "mpris": {
-    "dynamic-order": ["artist","title"],
-    "format": "{player_icon} {dynamic}",
-    "format-paused": "{status_icon} {dynamic}",
-    "status-icons": {
-      "paused": "",
-    },
-    "player-icons": {
-      "default": "",
-    },
+
+  "hyprland/submap": {
+    "format": "{}",
+    "tooltip": false
   },
+
   "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "{id}",
-    "all-outputs": true,
-    "disable-scroll": false,
-    "active-only": false,
-  },
-  "hyprland/window": {
-    "format": "{initialTitle}",
-  },
-  "tray": {
-    "show-passive-items": true,
-    "spacing": 10,
-  },
-  "clock#simpleclock": {
-    "tooltip": false,
-    "format": " {:%H:%M}",
-  },
-  "clock": {
-    "format": " {:%d %b}",
-      "tooltip": false,
-      "mode": "month",
-      "mode-mon-col": 1,
-      "on-scroll": 1,
-    },
-"battery": {
-	"interval": 60,
-	"states": {
-		"warning": 30,
-		"critical": 15
-	},
-	"events": {
-		"on-discharging-warning": "notify-send -u normal 'low battery'",
-		"on-discharging-critical": "notify-send -u critical 'vro charge ur laptop'",
-		"on-charging-100": "notify-send -u normal 'battery full'"
-	},
-	"format": "{capacity}% {icon}",
-	"format-icons": ["", "", "", "", ""],
-	"max-length": 25
-},
- "cpu": {
-    "format": " {usage}%",
-    "tooltip": true,
-    "interval": 1,
-  },
-  "memory": {
-    "format": " {used:0.1f}Gi",
-  },
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "  muted",
+    "format": "{icon}",
     "format-icons": {
-      "headphone": "",
-      "default": [" ", " ", " "],
-    },
-    "on-click": "pavucontrol",
-  },
-  "custom/sep": {
-    "format": "|",
-    "tooltip": false,
-  },
-  "custom/power": {
-    "tooltip": false,
-    "on-click": "wleave",
-    "format": "⏻",
-  },
-        "custom/dunst": {
-            "return-type": "json",
-            "format": "{text}",
-            "exec": "/usr/lib/waybar-dunst/waybar-dunst",
-            "on-click": "dunstctl set-paused toggle"
-        }
-      }
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "0",
+      "default": "",
+      "urgent": "*"
     }
-    },
-    "on-click": "sleep 0.1 && swaync-client -t -sw",
-    "return-type": "json",
-    "tooltip": false,
-  },
-}
-"bluetooth": {
-	"format": " {status}",
-	"format-connected": " {device_alias}",
-	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
-	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+  }
 }

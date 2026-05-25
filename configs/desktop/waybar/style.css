@@ -1,31 +1,36 @@
 * {
+    border: none;
+    border-radius: 0px;
     min-height: 0;
-    min-width: 0;
     font-family: "Cascadia Code NF";
     font-size: 12px;
     font-weight: 700;
-    padding-left: 1px;
-    padding-right: 1px;
 }
 
+.modules-center {
+  background: #000000;
+  padding: 6px 12px;
+  border-radius: 28px;
+  box-shadow: @ 4px 12px rgba(0, 0, 0, 0.3);
+}
 window#waybar {
-    transition-property: background-color;
-    transition-duration: 0.5s;
-    background-color: #1d1f21;
+    background: transparent;
 }
 
-#niri-window {
-    transition-property: opacity;
-    transition-duration: 0.4s;
+#workspaces {
+  background: transparent;
+  margin: 0px 2px;
+  border-radius: 16px;
+  border: none;
+  box-shadow: none;
 }
 
 #workspaces button {
-    padding: 0.3rem 0.6rem;
-    margin: 0.4rem 0.25rem;
-    border-radius: 25px;
-    /* background-color: #181825; */
-    background-color: #1d1f21;
+    background-color: #000000;
     color: #c4c8c5;
+    border-radius: 16px;
+    transition: all 0.3s ease-in-out;
+    min-width: 25px;
 }
 
 #workspaces button:hover {
@@ -36,6 +41,7 @@ window#waybar {
 
 #workspaces button.active {
     background-color: #c4c8c5;
+    min-width: 40px;
     color: #1d1f21;
     transition-duration: 0.4s;
 }
@@ -56,76 +62,13 @@ window#waybar {
 #window,
 #battery,
 #mpris {
-    padding: 0.3rem 0.6rem;
-    margin: 0.4rem 0.25rem;
-    border-radius: 15px;
+    background-color: #000000;
+    padding: 0 8px;
+    margin: 0 5px;
+    border-radius: 0px;
+    border: none;
+    box-shadow: none;
     /* background-color: #181825; */
-    background-color: #1d1f21;
+    /* background-color: #1d1f21; */
 }
 
-#mpris.playing {
-    color: #c4c8c5;
-}
-
-#mpris.paused {
-    color: #707270;
-}
-
-#custom-sep {
-    padding: 0px;
-    color: #585b70;
-}
-
-window#waybar.empty #window {
-    background-color: transparent;
-}
-
-#cpu {
-    color: #94e2d5;
-}
-
-#memory {
-    color: #cba6f7;
-}
-
-#clock {
-    color: #c4c8c5;
-}
-
-#clock.simpleclock {
-    color: #c4c8c5;
-}
-
-#battery {
-    color: #c4c8c5;
-}
-
-#window {
-    color: #c4c8c5;
-}
-
-#pulseaudio {
-    color: #c4c8c5;
-}
-
-#pulseaudio.muted {
-    color: #707270;
-}
-
-#custom-logo {
-    color: #89b4fa;
-}
-
-#custom-power {
-    color: #c4c8c5;
-}
-
-#tray {
-    color: #c4c8c5;
-}
-
-tooltip {
-    background-color: #181825;
-    border: 2px #89b4fa;
-    border-radius: 6px;
-}
