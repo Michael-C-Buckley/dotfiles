@@ -25,6 +25,7 @@ in
         nss_wrapper
         fd
         jq
+        nix
         ;
     };
 
@@ -33,6 +34,7 @@ in
     buildPhase = ''
       # Assemble a minimal passwd that maps the current UID
       export HOME=$out
+      TMPDIR=$(mktemp -d)
       export PASSWD_FILE=$(mktemp)
       echo "${USER}:x:$(id -u):$(id -g):${USER}:$HOME:/bin/sh" > $PASSWD_FILE
 
@@ -67,5 +69,9 @@ in
           })
         )
       }' > $out/manifest.json
+
+      # Create a nix manifest
+      cp $out/manifest.json $TMPDIR/manifest.json
+      nix eval --impure --expr "builtins.toJSON(builtins.readFile \"$TMPDIR/manifest.json\")" --extra-experimental-features nix-command > $out/manifest.nix
     '';
   }
