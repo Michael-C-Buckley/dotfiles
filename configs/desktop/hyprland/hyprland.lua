@@ -8,6 +8,7 @@ require("windows")
 -- Host files may or may not exist
 -- Prevents issues but hides actual errors in the file
 pcall(require, "host")
+pcall(require, "noctalia")
 
 hl.env("XCURSOR_SIZE", "28")
 hl.env("HYPRCURSOR_SIZE", "28")
