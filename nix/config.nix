@@ -18,16 +18,21 @@ in
     LOGNAME = username;
     HOSTNAME = hostname;
 
-    buildInputs = [
-      inputs.rootbeer.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.nss_wrapper
-    ];
+    buildInputs = builtins.attrValues {
+      rb = inputs.rootbeer.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      inherit
+        (pkgs)
+        nss_wrapper
+        fd
+        jq
+        ;
+    };
 
     HOME = "/build/home/${username}";
 
     buildPhase = ''
       # Assemble a minimal passwd that maps the current UID
-      export HOME=$(mktemp -d)
+      export HOME=$out
       export PASSWD_FILE=$(mktemp)
       echo "${USER}:x:$(id -u):$(id -g):${USER}:$HOME:/bin/sh" > $PASSWD_FILE
 
@@ -45,7 +50,22 @@ in
       done
 
       rb apply -p personal -f
-      rm -rf $HOME/.config/rootbeer/ # Strip this repo from the output, just capture the dots
-      cp -r $HOME/. $out/
+      rm -rf $out/.config/rootbeer/ # Strip this repo from the output, just capture the dots
+
+      # Create the manifest - cd in order to most easily get the relative paths
+      cd "$HOME"
+      fd -L -H . --type f | jq -R -s --arg out "$out" --arg user "${USER}" '{
+        clobber_by_default: false,
+        version: 3,
+        files: (
+          split("\n") |
+          map(select(length > 0)) |
+          map({
+            target: "/home/\($user)/" + .,
+            source: "\($out)/" + .,
+            type: "symlink"
+          })
+        )
+      }' > $out/manifest.json
     '';
   }
