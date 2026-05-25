@@ -2,6 +2,7 @@
   inputs,
   mkPkgs,
 }: let
+  inherit (builtins) attrValues listToAttrs mapAttrs;
   mkOutput = {
     file,
     host,
@@ -21,20 +22,17 @@
         file = "config";
         inherit host pkgs;
       };
-      "manifest-${host}" = pkgs.writeText "rb-manifest-${host}" (mkOutput {
-        file = "manifest";
-        inherit host pkgs;
-      });
     };
   };
   mkSets = system: hosts: let
     pkgs = mkPkgs system;
+    inherit (pkgs.lib) foldl' mergeAttrs;
   in
-    builtins.listToAttrs (map (host: mkSet {inherit pkgs host;}) hosts);
+    foldl' mergeAttrs {} (attrValues (listToAttrs (map (host: mkSet {inherit pkgs host;}) hosts)));
 
   hosts = {
     x86_64-linux = ["x570" "t14g5" "t14"];
     aarch64-linux = ["o1"];
   };
 in
-  builtins.mapAttrs (n: v: mkSets n v) hosts
+  mapAttrs (n: v: mkSets n v) hosts
