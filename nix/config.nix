@@ -65,7 +65,8 @@ in
           map({
             target: "/home/\($user)/" + .,
             source: "\($out)/" + .,
-            type: "symlink"
+            type: "symlink",
+            clobber: false
           })
         )
       }' > $out/manifest.json
