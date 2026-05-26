@@ -54,26 +54,7 @@
   "toolbar": { "code_actions": true },
   "agent": {
     "default_profile": "ask",
-    "default_model": {
-      "provider": "openrouter",
-      "model": "x-ai/grok-4.3",
-      "enable_thinking": true,
-    },
     "dock": "right",
-    "favorite_models": [
-      {
-        "provider": "copilot_chat",
-        "model": "claude-opus-4.7",
-        "enable_thinking": true,
-        "effort": "medium",
-      },
-      {
-        "provider": "copilot_chat",
-        "model": "gemini-3.1-pro-preview",
-        "enable_thinking": true,
-        "effort": "high",
-      },
-    ],
     "model_parameters": [],
   },
   "git_panel": {
