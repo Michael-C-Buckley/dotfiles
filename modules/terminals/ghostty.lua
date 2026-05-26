@@ -6,7 +6,7 @@ local rb = require("rootbeer")
 local config = [[
 cursor-color = #44A3A3
 cursor-opacity = 0.6
-font-family = Cascadia Code NF
+font-family = Lilex Nerd Font Mono
 background = #000000
 keybind = performable:ctrl+shift+h=previous_tab
 keybind = performable:ctrl+shift+l=next_tab
@@ -16,7 +16,7 @@ if rb.host.os == "macos" then
   config = config .. [[
 font-size = 14
 font-thicken = true
-font-thicken-strength = 155
+font-thicken-strength = 255
 command = /opt/homebrew/bin/fish
 ]]
 else

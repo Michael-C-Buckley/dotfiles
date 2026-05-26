@@ -10,14 +10,15 @@ rb.profile.define({
 
 require("modules.git")
 
-function host_import(hostname)
+local function host_import(hostname)
   require("hosts." .. hostname .. ".host")
 end
 
 if rb.host.os == "macos" then
-  require("modules.brew")
   require("modules.presets.base")
+  require("modules.terminals.ghostty")
   require("modules.apps.nvim")
+  require("modules.brew")
 end
 
 if rb.host.os == "linux" then

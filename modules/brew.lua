@@ -16,7 +16,6 @@ local common_casks = {
     "ghostty",
     "zed",
     "secretive",
-    "kitty",
     "font-lilex",
     "font-ibm-plex-mono",
     "font-ibm-plex-sans",
