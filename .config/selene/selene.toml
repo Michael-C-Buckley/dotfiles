@@ -1,4 +1,4 @@
-std = "oxwm+hl"
+std = "oxwm+hl+nvim"
 
 [lints]
 global_usage = "allow"
