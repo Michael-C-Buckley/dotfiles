@@ -1,4 +1,13 @@
 local rb = require("rootbeer")
-rb.link_file("configs/editor/helix/config.toml", "~/.config/helix/config.toml")
-rb.link_file("configs/editor/helix/languages.toml", "~/.config/helix/languages.toml")
 
+local function link(src, dst)
+  rb.link_file("configs/editor/helix/" .. src, "~/.config/helix/" .. dst)
+end
+
+local function links(file)
+  link(file, file)
+end
+
+links("config.toml")
+links("languages.toml")
+link("azen.toml", "themes/azen.toml")

@@ -1,0 +1,20 @@
+"ui.background" = { bg = "black" }
+"ui.text" = "white"
+"ui.cursor" = { fg = "black", bg = "white" }
+"ui.cursor.match" = { fg = "red", modifiers = ["bold"] }
+"ui.selection" = { fg = "blue", bg = "light_gray" }
+
+comment = "gray"
+string = "orange"
+
+# Keep punctuation neutral unless it is the active matching pair.
+punctuation = "white"
+
+[palette]
+black = "#000000"
+white = "#ffffff"
+gray = "#7a7a7a"
+orange = "#f6c177"
+light_gray = "#dfe0dc"
+red = "#ff4040"
+blue = "#44A3A3"
