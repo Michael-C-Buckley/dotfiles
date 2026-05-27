@@ -1,2 +1,6 @@
 .direnv
 result
+
+# Don't include lock files
+*.lock
+nvim-pack-lock.json
