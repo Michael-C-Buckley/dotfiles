@@ -3,11 +3,11 @@ if vim.g.vscode then
   require("base.vscode_keymaps")
 else
   -- Everything else is the normal flow
-  require("ui.themes")
   vim.pack.add({ "https://github.com/Shatur/neovim-ayu" })
   require("ayu")
 
   -- Customized and super minimal version of quiet with just a tiny bit of useful highlighting
+  require("ui.quiet")
   vim.cmd.colorscheme("quiet")
 
   -- === Options ===

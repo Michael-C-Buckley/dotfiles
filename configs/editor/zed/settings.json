@@ -53,6 +53,11 @@
   "telemetry": { "diagnostics": false, "metrics": false },
   "toolbar": { "code_actions": true },
   "agent": {
+    "default_model": {
+      "provider": "openrouter",
+      "model": "openai/gpt-oss-120b:free",
+      "enable_thinking": true
+    },
     "default_profile": "ask",
     "dock": "right",
     "model_parameters": [],
