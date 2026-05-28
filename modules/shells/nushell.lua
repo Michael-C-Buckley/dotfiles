@@ -1,6 +1,14 @@
 local rb = require("rootbeer")
-local dir = "configs/shells/nushell"
-rb.link_file(dir .. "/config.nu", "~/.config/nushell/config.nu")
-rb.link_file(dir .. "/git.nu", "~/.config/nushell/git.nu")
-rb.link_file(dir .. "/starship.nu", "~/.config/nushell/starship.nu")
-rb.link_file(dir .. "/prompt.nu", "~/.config/nushell/prompt.nu")
+
+local function link_nu(filename)
+  rb.link_file(
+    "configs/shells/nushell/" .. filename,
+    "~/.config/nushell/" .. filename
+  )
+end
+
+link_nu("env.nu")
+link_nu("config.nu")
+link_nu("git.nu")
+link_nu("starship.nu")
+link_nu("prompt.nu")

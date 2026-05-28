@@ -1,3 +1,5 @@
+const config_dir = ($nu.config-path | path dirname)
+
 # ── Environment ──────────────────────────────────────────────────────────────
 
 $env.config = {
@@ -198,4 +200,5 @@ let multi_completer = {|spans: list<string>|
 
 $env.config.completions.external.completer = $multi_completer
 
-source-env ~/.config/nushell/prompt.nu
+source-env ($config_dir | path join "prompt.nu")
+# source-env ($config_dir | path join "starship.nu") # WIP still
