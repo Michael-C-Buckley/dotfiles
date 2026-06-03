@@ -4,7 +4,7 @@
 -------------------------------------------------------------------------------
 -- Variables
 -------------------------------------------------------------------------------
-local terminal = "ghostty"
+local terminal = "kitty"
 local colors = require("colors")
 require("bar")
 require("binds")

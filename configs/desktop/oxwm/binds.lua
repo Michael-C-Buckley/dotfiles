@@ -8,11 +8,28 @@ local modkey = "Mod4"
 oxwm.set_modkey(modkey) -- This is for Mod + mouse binds, such as drag/resize
 
 oxwm.key.bind({ modkey }, "Return", oxwm.spawn_terminal())
+oxwm.key.bind({ modkey }, "R", oxwm.spawn({ "dmenu_run" }))
+oxwm.key.bind({ modkey }, "Space", oxwm.spawn({ "rofi -show drun" }))
+
+-- Window manager controls
+oxwm.key.bind({ modkey, "Shift" }, "Q", oxwm.quit())
+oxwm.key.bind({ modkey, "Shift" }, "R", oxwm.restart())
 
 -- Copy screenshot to clipboard
 oxwm.key.bind({ modkey }, "S", oxwm.spawn({ "sh", "-c", "maim -s | xclip -selection clipboard -t image/png" }))
 
 oxwm.key.bind({ modkey }, "Q", oxwm.client.kill())
+
+-- Power
+--oxwm.key.bind({modkey, "Control"}, ";", oxwm.spawn({"sh", "-c", "loginctl poweroff ; systemctl poweroff"}))
+--oxwm.key.bind({modkey, "Control", "Shift"}, ";", oxwm.spawn({"sh", "-c", "loginctl reboot ; systemctl reboot"}))
+
+-- Laptop Backlight
+oxwm.key.bind({}, "XF86MonBrightnessDown", oxwm.spawn({"sh", "-c", "light -U 10"}))
+oxwm.key.bind({}, "XF86MonBrightnessUp", oxwm.spawn({"sh", "-c", "light -A 10"}))
+oxwm.key.bind({}, "XF86AudioRaiseVolume", oxwm.spawn({"sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ +5%"}))
+oxwm.key.bind({}, "XF86AudioLowerVolume", oxwm.spawn({"sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ -5%"}))
+oxwm.key.bind({}, "XF86AudioMute", oxwm.spawn({"sh", "-c", "pactl set-sink-mute @DEFAULT_SINK@ toggle"}))
 
 -- Keybind overlay - Shows important keybindings on screen
 oxwm.key.bind({ modkey, "Shift" }, "Slash", oxwm.show_keybinds())
@@ -38,10 +55,6 @@ oxwm.key.bind({ modkey }, "P", oxwm.inc_num_master(-1))
 
 -- Gaps toggle
 oxwm.key.bind({ modkey }, "A", oxwm.toggle_gaps())
-
--- Window manager controls
-oxwm.key.bind({ modkey, "Shift" }, "Q", oxwm.quit())
-oxwm.key.bind({ modkey, "Shift" }, "R", oxwm.restart())
 
 -- Focus movement [1 for up in the stack, -1 for down]
 oxwm.key.bind({ modkey }, "J", oxwm.client.focus_stack(1))
