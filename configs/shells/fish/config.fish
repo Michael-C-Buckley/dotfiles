@@ -75,6 +75,10 @@ abbr -a grv git remote -v
 
 abbr -a nv nvim
 
+if not command -q rb && test -x ~/.rootbeer/bin/rb
+    alias rb="~/.rootbeer/bin/rb"
+end
+
 # ── Tool integrations (loaded only if installed) ─────────────────────────────
 if type -q starship; and not set -q FISH_NO_STARSHIP
     starship init fish | source
