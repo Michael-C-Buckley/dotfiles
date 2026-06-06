@@ -21,10 +21,13 @@ fish_add_path -g /opt/homebrew/sbin
 
 # ── SSH  ─────────────────────────────────────────────────────────────────────
 # Prefer a custom agent if my socket isn't already set
-set standard_agent "$HOME/.ssh/agent/internal.sock"
+set custom_agent "$HOME/.ssh/agent/internal.sock"
+set standard_agent /run/user/(id -u)/ssh-agent.sock
 
-if not set -q SSH_AUTH_SOCK
-  if test -S $standard_agent
+if not test -S "$SSH_AUTH_SOCK"
+  if test -S $custom_agent
+    set -gx SSH_AUTH_SOCK $custom_agent
+  else if test -S $standard_agent
     set -gx SSH_AUTH_SOCK $standard_agent
   end
 end
