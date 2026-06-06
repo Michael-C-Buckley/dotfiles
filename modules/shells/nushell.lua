@@ -10,5 +10,4 @@ end
 link_nu("env.nu")
 link_nu("config.nu")
 link_nu("git.nu")
-link_nu("starship.nu")
 link_nu("prompt.nu")
