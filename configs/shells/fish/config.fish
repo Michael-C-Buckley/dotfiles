@@ -39,17 +39,27 @@ status is-interactive; or return
 set -g fish_greeting
 
 set -g fish_key_bindings fish_hybrid_key_bindings
+set -g fish_transient_prompt 1
 
 # Better colors for ls (if available)
 set -gx CLICOLOR 1
 
-# Backup default prompt, overriden by starship if available
-fish_config prompt choose arrow
+# Native prompt, based on the starship prompt I use
+set -l fish_config_dir (path dirname (path resolve (status filename)))
+for prompt_file in fish_prompt.fish fish_mode_prompt.fish
+    set -l prompt_path $fish_config_dir/functions/$prompt_file
+    test -r $prompt_path; and source $prompt_path
+end
 
 bind -M insert ctrl-backspace backward-kill-word
 bind -M insert alt-backspace backward-kill-word
 
 # ── Aliases ──────────────────────────────────────────────────────────────────
+
+abbr -a reload 'source ~/.config/fish/config.fish'
+abbr -a path 'string split : $PATH'
+abbr -a fenv 'set --show'
+
 alias ip 'ip -c'
 abbr -a cl 'clear'
 if command -q eza
@@ -104,12 +114,6 @@ end
 
 function mkcd
     mkdir -p $argv[1]; and cd $argv[1]
-end
-
-# ── Tool integrations (loaded only if installed) ─────────────────────────────
-if type -q starship; and not set -q FISH_NO_STARSHIP
-    starship init fish | source
-    enable_transience
 end
 
 if type -q zoxide
