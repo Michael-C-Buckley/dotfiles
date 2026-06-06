@@ -1,5 +1,3 @@
-# ~/.config/fish/config.fish
-
 # ── Environment ──────────────────────────────────────────────────────────────
 set -gx EDITOR nvim
 set -gx VISUAL nvim
@@ -37,7 +35,7 @@ status is-interactive; or return
 # Disable the default greeting
 set -g fish_greeting
 
-fish_vi_key_bindings
+set -g fish_key_bindings fish_hybrid_key_bindings
 
 # Better colors for ls (if available)
 set -gx CLICOLOR 1
@@ -51,32 +49,58 @@ bind -M insert alt-backspace backward-kill-word
 # ── Aliases ──────────────────────────────────────────────────────────────────
 alias ip 'ip -c'
 abbr -a cl 'clear'
-abbr -a ll 'ls -lah'
-abbr -a la 'ls -A'
-abbr -a l  'ls -CF'
+if command -q eza
+    abbr -a ls eza
+    abbr -a ll 'eza -lah --git --icons'
+    abbr -a tree 'eza --tree --icons'
+else
+    abbr -a ll 'ls -lah'
+    abbr -a la 'ls -A'
+    abbr -a l  'ls -CF'
+end
+
 abbr -a .. 'cd ..'
 abbr -a ... 'cd ../..'
 abbr -a .... 'cd ../../..'
 
-abbr -a g   git
-abbr -a ga  git add
-abbr -a gaa git add .
-abbr -a gs  git status
-abbr -a gd  git diff
-abbr -a gl  git log --oneline --graph --decorate
-abbr -a gp  git pull
-abbr -a gP  git push
-abbr -a gc  git commit
-abbr -a gcm git commit -m
-abbr -a gco git checkout
-abbr -a gb  git branch
-abbr -a gr  git remote
-abbr -a grv git remote -v
+if command -q git
+    abbr -a g   git
+    abbr -a ga  git add
+    abbr -a gaa git add .
+    abbr -a gs  git status
+    abbr -a gd  git diff
+    abbr -a gl  git log --oneline --graph --decorate
+    abbr -a gp  git pull
+    abbr -a gP  git push
+    abbr -a gc  git commit
+    abbr -a gcm git commit -m
+    abbr -a gco git checkout
+    abbr -a gb  git branch
+    abbr -a gr  git remote
+    abbr -a grv git remote -v
+end
+if command -q gitui
+    abbr -a gu  gitui
+end
 
 abbr -a nv nvim
 
 if not command -q rb && test -x ~/.rootbeer/bin/rb
     alias rb="~/.rootbeer/bin/rb"
+end
+
+if command -q bat
+    abbr -a cat bat -p
+end
+
+if not command -q sudo; and command -q doas
+    function sudo --wraps doas --description 'Run a command via doas'
+        command doas $argv
+    end
+end
+
+function mkcd
+    mkdir -p $argv[1]; and cd $argv[1]
 end
 
 # ── Tool integrations (loaded only if installed) ─────────────────────────────
