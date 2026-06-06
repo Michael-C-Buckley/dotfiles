@@ -1,13 +1,9 @@
-local rb = require("rootbeer")
+local optional = require("modules.lib.optional")
 
-local function link(src, dst)
-  rb.link_file("configs/editor/helix/" .. src, "~/.config/helix/" .. dst)
-end
+local dir = "configs/editor/helix"
 
-local function links(file)
-  link(file, file)
-end
-
-links("config.toml")
-links("languages.toml")
-link("azen.toml", "themes/azen.toml")
+optional.link_files_when_binary("hx", {
+  { dir .. "/config.toml", "~/.config/helix/config.toml" },
+  { dir .. "/languages.toml", "~/.config/helix/languages.toml" },
+  { dir .. "/azen.toml", "~/.config/helix/themes/azen.toml" },
+})

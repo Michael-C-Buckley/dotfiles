@@ -1,4 +1,7 @@
-local rb = require("rootbeer")
+local optional = require("modules.lib.optional")
+
 local dir = "configs/desktop/waybar"
-rb.link_file(dir .. "/config.jsonc", "~/.config/waybar/config.jsonc")
-rb.link_file(dir .. "/style.css", "~/.config/waybar/style.css")
+optional.link_files_when_binary("waybar", {
+  { dir .. "/config.jsonc", "~/.config/waybar/config.jsonc" },
+  { dir .. "/style.css", "~/.config/waybar/style.css" },
+})

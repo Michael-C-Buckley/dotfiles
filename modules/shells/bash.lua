@@ -1,4 +1,7 @@
-local rb = require("rootbeer")
+local optional = require("modules.lib.optional")
+
 local dir = "configs/shells/bash"
-rb.link_file(dir .. "/bashrc", "~/.bashrc")
-rb.link_file(dir .. "/bash_profile", "~/.bash_profile")
+optional.link_files_when_binary("bash", {
+  { dir .. "/bashrc", "~/.bashrc" },
+  { dir .. "/bash_profile", "~/.bash_profile" },
+})

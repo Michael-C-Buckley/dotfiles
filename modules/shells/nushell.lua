@@ -1,13 +1,10 @@
-local rb = require("rootbeer")
+local optional = require("modules.lib.optional")
 
-local function link_nu(filename)
-  rb.link_file(
-    "configs/shells/nushell/" .. filename,
-    "~/.config/nushell/" .. filename
-  )
-end
+local dir = "configs/shells/nushell"
 
-link_nu("env.nu")
-link_nu("config.nu")
-link_nu("git.nu")
-link_nu("prompt.nu")
+optional.link_files_when_binary("nu", {
+  { dir .. "/env.nu", "~/.config/nushell/env.nu" },
+  { dir .. "/config.nu", "~/.config/nushell/config.nu" },
+  { dir .. "/git.nu", "~/.config/nushell/git.nu" },
+  { dir .. "/prompt.nu", "~/.config/nushell/prompt.nu" },
+})

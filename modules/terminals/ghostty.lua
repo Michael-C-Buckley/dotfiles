@@ -1,7 +1,8 @@
+local optional = require("modules.lib.optional")
 local rb = require("rootbeer")
+
 --local dir = "configs/terminal/ghostty"
 --rb.link_file(dir .. "/config", "~/.config/ghostty/config")
-
 
 local config = [[
 cursor-color = #44A3A3
@@ -13,7 +14,8 @@ keybind = performable:ctrl+shift+l=next_tab
 ]]
 
 if rb.host.os == "macos" then
-  config = config .. [[
+  config = config
+    .. [[
 font-size = 14
 font-thicken = true
 font-thicken-strength = 255
@@ -25,4 +27,6 @@ font-size = 11
 ]]
 end
 
-rb.file("~/.config/ghostty/config", config)
+optional.when_binary("ghostty", function()
+  rb.file("~/.config/ghostty/config", config)
+end)

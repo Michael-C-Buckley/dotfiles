@@ -1,5 +1,8 @@
-local rb = require("rootbeer")
-rb.link_file(
-  "configs/terminal/fastfetch/linux.jsonc",
-  "~/.config/fastfetch/config.jsonc"
-)
+local optional = require("modules.lib.optional")
+
+optional.link_files_when_binary("fastfetch", {
+  {
+    "configs/terminal/fastfetch/linux.jsonc",
+    "~/.config/fastfetch/config.jsonc",
+  },
+})

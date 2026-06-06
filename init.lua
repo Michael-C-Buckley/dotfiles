@@ -11,7 +11,17 @@ rb.profile.define({
 require("modules.git")
 
 local function host_import(hostname)
+  if not hostname then
+    return false
+  end
+
+  local host_file = rb.source_dir .. "/hosts/" .. hostname .. "/host.lua"
+  if not rb.is_file(host_file) then
+    return false
+  end
+
   require("hosts." .. hostname .. ".host")
+  return true
 end
 
 if rb.host.os == "macos" then
@@ -21,5 +31,5 @@ if rb.host.os == "macos" then
 end
 
 if rb.host.os == "linux" then
-  pcall(host_import, rb.host.hostname)
+  host_import(rb.host.hostname)
 end
