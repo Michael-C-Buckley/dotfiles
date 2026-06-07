@@ -3,7 +3,7 @@ local optional = require("modules.lib.optional")
 local hypr = "configs/desktop/hyprland/"
 local conf = "~/.config/hypr/"
 
-local files = { "binds", "hyprland", "input", "lookfeel", "windows" }
+local files = { "binds", "hyprland", "input", "lookfeel" }
 local links = {}
 
 for _, name in ipairs(files) do

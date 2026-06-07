@@ -3,7 +3,6 @@
 require("binds")
 require("input")
 require("lookfeel")
-require("windows")
 
 -- Host files may or may not exist
 -- Prevents issues but hides actual errors in the file
