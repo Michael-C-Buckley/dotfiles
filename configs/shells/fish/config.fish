@@ -12,6 +12,13 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_STATE_HOME $HOME/.local/state
+set -q XDG_CONFIG_DIRS[1]; or set -gx --path XDG_CONFIG_DIRS /etc/xdg
+set -q XDG_DATA_DIRS[1]; or set -gx --path XDG_DATA_DIRS /usr/local/share /usr/share
+
+if command -q brew
+  set -l brew_data_dir (brew --prefix)/share
+  contains -- $brew_data_dir $XDG_DATA_DIRS; or set -gx --path XDG_DATA_DIRS $brew_data_dir $XDG_DATA_DIRS
+end
 
 # ── PATH ─────────────────────────────────────────────────────────────────────
 fish_add_path -g $HOME/.local/bin
@@ -21,14 +28,21 @@ fish_add_path -g /opt/homebrew/sbin
 
 # ── SSH  ─────────────────────────────────────────────────────────────────────
 # Prefer a custom agent if my socket isn't already set
-set custom_agent "$HOME/.ssh/agent/internal.sock"
+set custom_agent "$HOME/.ssh/agent/custom.sock"
+set internal_agent "$HOME/.ssh/agent/internal.sock"
 set standard_agent /run/user/(id -u)/ssh-agent.sock
 
-if not test -S "$SSH_AUTH_SOCK"
-  if test -S $custom_agent
-    set -gx SSH_AUTH_SOCK $custom_agent
-  else if test -S $standard_agent
-    set -gx SSH_AUTH_SOCK $standard_agent
+# Ignore the default macOS launchd agent.
+if set -q SSH_AUTH_SOCK; and string match -rq '^/var/run/com\.apple\.launchd\.[^/]+/Listeners$' -- $SSH_AUTH_SOCK
+    set -e SSH_AUTH_SOCK
+end
+
+if not set -q SSH_AUTH_SOCK; or not test -S "$SSH_AUTH_SOCK"
+  for agent_sock in $custom_agent $standard_agent $internal_agent
+    if test -S $agent_sock
+      set -gx SSH_AUTH_SOCK $agent_sock
+      break
+    end
   end
 end
 
