@@ -117,7 +117,7 @@ if not command -q rb && test -x ~/.rootbeer/bin/rb
 end
 
 if command -q bat
-    abbr -a cat bat -p
+    alias cat='bat -p'
 end
 
 if not command -q sudo; and command -q doas

@@ -19,7 +19,7 @@ function __native_prompt_dir
     if test -n "$git_prefix"
         printf '%s%s%s ' (set_color cyan) $git_prefix (set_color normal)
     else
-        printf '%s%s%s ' (set_color cyan) (prompt_pwd) (set_color normal)
+        printf '%s%s%s ' (set_color cyan) (prompt_pwd -d 0) (set_color normal)
     end
 end
 
