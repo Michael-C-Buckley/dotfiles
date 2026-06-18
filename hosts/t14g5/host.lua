@@ -1,17 +1,16 @@
 local optional = require("modules.lib.optional")
 local rb = require("rootbeer")
 
-local modules = {
-  "apps.nvim",
-  "desktop.oxwm",
-  "presets.desktop",
-  "presets.shells",
-}
+require("modules.presets.desktop")
 
-for i, v in ipairs(modules) do
-  require("modules." .. v)
-end
+optional.link_files_when_binary("mango", {
+  { "hosts/t14g5/mango.conf", "~/.config/mango/host.conf" },
+})
 
---rb.link_file("hosts/t14g5/mango.conf", "~/.config/mango/host.conf")
---rb.link("hosts/t14g5/hyprland.lua", "~/.config/hypr/host.lua")
---rb.link("configs/desktop/hyprland/noctalia.lua", "~/.config/hypr/noctalia.lua")
+optional.link_files_when_binary("hyprland", {
+  { "hosts/t14g5/hyprland.lua", "~/.config/hypr/host.lua" },
+})
+
+optional.link_files_when_binary("noctalia", {
+  { "configs/desktop/hyprland/noctalia.lua", "~/.config/hypr/noctalia.lua" },
+})
