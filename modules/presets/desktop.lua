@@ -1,8 +1,10 @@
 local profile = require("rootbeer.profile")
 local rb = require("rootbeer")
 
+require("modules.presets.shells")
+
 local apps = { "fastfetch", "helix", "zed" }
-local desktop = { "hyprland", "mango", "niri", "oxwm", "waybar", "mimeapps" }
+local desktop = { "hyprland", "mango", "niri", "oxwm", "waybar" }
 local terminals = { "kitty" }
 
 function import_items(family, dir)

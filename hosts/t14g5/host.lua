@@ -1,3 +1,4 @@
+local optional = require("modules.lib.optional")
 local rb = require("rootbeer")
 
 local modules = {
