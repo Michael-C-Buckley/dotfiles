@@ -28,6 +28,7 @@ if rb.host.os == "macos" then
   require("modules.terminals.ghostty")
   require("modules.apps.nvim")
   require("modules.brew")
+  require("modules.shells.nushell")
 end
 
 if rb.host.os == "linux" then

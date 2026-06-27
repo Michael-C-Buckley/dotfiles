@@ -81,6 +81,9 @@ $env.config = {
     ]
 }
 
+# ── Abbreviations ─────────────────────────────────────────────────────────────
+source-env ($config_dir | path join "abbreviations.nu")
+
 # ── SSH  ─────────────────────────────────────────────────────────────────────
 let standard_agent = ($env.HOME | path join ".ssh/agent/internal.sock")
 
