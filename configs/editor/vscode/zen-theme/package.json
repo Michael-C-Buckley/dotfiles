@@ -1,0 +1,22 @@
+{
+	"name": "Zen",
+	"displayName": "Zen",
+	"description": "A restrained, mostly monochrome theme ported from the my Neovim configuration.",
+	"version": "0.0.1",
+	"publisher": "michael-c-buckley",
+	"engines": {
+		"vscode": "^1.80.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Zen",
+				"uiTheme": "vs-dark",
+				"path": "./themes/zen-color-theme.json"
+			}
+		]
+	}
+}
