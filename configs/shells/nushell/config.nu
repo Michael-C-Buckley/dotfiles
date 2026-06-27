@@ -168,6 +168,18 @@ def sudo [...args] {
   }
 }
 
+# Use rootbeer's bundled rb binary if it isn't already on PATH
+def --wrapped rb [...args] {
+  let local_rb = ($env.HOME | path join ".rootbeer/bin/rb")
+  if (which ^rb | is-not-empty) {
+    ^rb ...$args
+  } else if ($local_rb | path exists) {
+    ^$local_rb ...$args
+  } else {
+    echo "nushell: rb not found"
+  }
+}
+
 # ── Completions ────────────────────────────────────────────────────────────────
 
 let carapace_completer = {|spans: list<string>|
