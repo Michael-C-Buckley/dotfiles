@@ -8,7 +8,8 @@ local commone_formulae = {
     "age-plugin-se",
     "age-plugin-yubikey",
     "fastfetch",
-    "direnv"
+    "direnv",
+    "neovim"
 }
 
 local common_casks = {
@@ -26,6 +27,7 @@ local extra_casks = profile.select({
     personal = {
     },
     work = {
+        "microsoft-outlook"
     },
 })
 
@@ -41,7 +43,6 @@ brew.config({
         "git-delta",
         "jq",
         "make",
-        "opencode",
         "ripgrep",
         "rsync",
         "telnet",
