@@ -77,8 +77,8 @@ abbr -a fenv 'set --show'
 alias ip 'ip -c'
 abbr -a cl 'clear'
 if command -q eza
-    abbr -a ls eza
-    abbr -a ll 'eza -lah --git --icons'
+    alias ls eza
+    alias ll 'eza -lah --git --icons'
     abbr -a tree 'eza --tree --icons'
 else
     abbr -a ll 'ls -lah'
