@@ -4,10 +4,12 @@ require("binds")
 require("input")
 require("lookfeel")
 
--- Host files may or may not exist
--- Prevents issues but hides actual errors in the file
-pcall(require, "host")
-pcall(require, "noctalia")
+-- Host files
+require("host")
+
+-- Desktop Shell (on DMS currently)
+-- pcall(require, "noctalia")
+require("dms")
 
 hl.env("XCURSOR_SIZE", "28")
 hl.env("HYPRCURSOR_SIZE", "28")
