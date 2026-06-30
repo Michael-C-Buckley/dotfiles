@@ -127,6 +127,49 @@ def --env fcd [] {
     }
 }
 
+# List concrete aliases from the main SSH config and config.d snippets.
+def ssh-config-hosts [] {
+    let config_files = (
+        [($env.HOME | path join ".ssh/config")]
+        | append (glob ($env.HOME | path join ".ssh/config.d/*.conf"))
+        | append (glob ($env.HOME | path join ".orbstack/ssh/config"))
+    )
+
+    $config_files
+    | where { |file| $file | path exists }
+    | each { |file| open --raw $file | lines }
+    | flatten
+    | where { |line| $line =~ "(?i)^\\s*Host\\s+" }
+    | each { |line|
+        $line
+        | str replace --regex "(?i)^\\s*Host\\s+" ""
+        | str replace --regex "\\s+#.*$" ""
+        | split row --regex "\\s+"
+      }
+    | flatten
+    | where { |host| $host !~ "[*!?]" }
+    | uniq
+    | sort
+}
+
+# Pick a configured SSH host with fzf. Arguments are passed as SSH options.
+def --wrapped sshf [...args: string] {
+    if (which fzf | is-empty) {
+        error make { msg: "sshf: fzf is not installed" }
+    }
+
+    let host = (
+        ssh-config-hosts
+        | str join (char nl)
+        | ^fzf --height 40% --reverse --prompt "ssh> "
+        | str trim
+    )
+
+    if $host != "" {
+        ^ssh ...$args $host
+    }
+}
+
 # Function to wrap the default vim command and use nvim if available
 def vim [...args] {
   if (which nvim | is-not-empty) {
@@ -203,13 +246,31 @@ let file_completer = {|spans: list<string>|
     | sort-by value
 }
 
-# Multi-completer: tries carapace first, falls back to file completion
-let multi_completer = {|spans: list<string>|
-    let carapace_result = do $carapace_completer $spans
-    if ($carapace_result | is-not-empty) {
-        $carapace_result
+# SSH host aliases are not provided by carapace, so complete them directly.
+let ssh_completer = {|spans: list<string>|
+    let command = ($spans | first | path basename)
+    let current = ($spans | last)
+
+    if $command == "ssh" and not ($current | str starts-with "-") {
+        ssh-config-hosts
+        | each { |host| { value: $host, description: "SSH host" } }
     } else {
-        do $file_completer $spans
+        []
+    }
+}
+
+# Multi-completer: handles SSH hosts, then tries carapace and file completion.
+let multi_completer = {|spans: list<string>|
+    let ssh_result = do $ssh_completer $spans
+    if ($ssh_result | is-not-empty) {
+        $ssh_result
+    } else {
+        let carapace_result = do $carapace_completer $spans
+        if ($carapace_result | is-not-empty) {
+            $carapace_result
+        } else {
+            do $file_completer $spans
+        }
     }
 }
 
