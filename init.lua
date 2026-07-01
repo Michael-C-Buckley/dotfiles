@@ -25,10 +25,7 @@ local function host_import(hostname)
 end
 
 if rb.host.os == "macos" then
-  require("modules.terminals.ghostty")
-  require("modules.apps.nvim")
-  require("modules.brew")
-  require("modules.shells.nushell")
+  require("modules.presets.macos")
 end
 
 if rb.host.os == "linux" then

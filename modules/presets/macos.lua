@@ -1,0 +1,5 @@
+require("modules.terminals.ghostty")
+require("modules.apps.nvim")
+require("modules.brew")
+require("modules.shells.nushell")
+require("modules.shells.zsh")

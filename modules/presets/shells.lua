@@ -1,4 +1,4 @@
-local shells = { "bash", "fish", "nushell", "zsh" }
+local shells = { "bash", "fish", "nushell" }
 
 local function import_items(family, dir)
   for _, v in ipairs(family) do
