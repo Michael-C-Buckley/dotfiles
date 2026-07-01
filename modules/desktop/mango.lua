@@ -14,5 +14,4 @@ optional.when_binary("mango", function()
 
   rb.link_file(waybar .. "/config.jsonc", "~/.config/mango/waybar/config.jsonc")
   rb.link_file(waybar .. "/style.css", "~/.config/mango/waybar/style.css")
-  rb.link_file(dsktp .. "/fuzzel/fuzzel.ini", "~/.config/fuzzel/fuzzel.ini")
 end)
