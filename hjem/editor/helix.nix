@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  path = ../configs/editor/helix;
+  path = ../../configs/editor/helix;
 in {
   hjem.users.michael = {
     packages = [pkgs.helix];
