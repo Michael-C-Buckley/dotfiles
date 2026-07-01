@@ -1,9 +1,0 @@
-spawn-at-startup "noctalia-shell"
-
-binds {
-    Mod+Ctrl+Alt+L hotkey-overlay-title="Screen Lock: hyprlock" { spawn-sh "/nix/store/p8dyp8ik2qkmwqa0zsq3p1awml5xqhmq-noctalia-wrapper ipc call lockScreen lock"; }
-    Mod+space hotkey-overlay-title="Noctalia: Launcher" { spawn-sh "/nix/store/p8dyp8ik2qkmwqa0zsq3p1awml5xqhmq-noctalia-wrapper ipc call launcher toggle"; }
-    Mod+Ctrl+space hotkey-overlay-title="Noctalia: Toggle Bar" { spawn-sh "/nix/store/p8dyp8ik2qkmwqa0zsq3p1awml5xqhmq-noctalia-wrapper ipc call bar toggle"; }
-    Mod+Ctrl+M hotkey-overlay-title="Noctalia: Toggle Dark Mode" { spawn-sh "/nix/store/p8dyp8ik2qkmwqa0zsq3p1awml5xqhmq-noctalia-wrapper ipc call darkMode toggle"; }
-    Mod+Ctrl+N hotkey-overlay-title="Noctalia: Toggle Notifications Do Not Disturb" { spawn-sh "/nix/store/p8dyp8ik2qkmwqa0zsq3p1awml5xqhmq-noctalia-wrapper ipc call notifications toggleDND"; }
-}
