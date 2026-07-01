@@ -1,3 +1,4 @@
+# A simple custom theme that is pretty neutral and only has a small amount of color
 "ui.background" = { bg = "black" }
 "ui.text" = "white"
 "ui.cursor" = { fg = "black", bg = "white" }
