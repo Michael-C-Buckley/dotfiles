@@ -13,10 +13,13 @@
         inherit system;
         config.allowUnfree = true;
       };
+
+    rlib = import ./nix/lib {inherit inputs;};
   in {
     devShells = eachSystem (system: {
       default = import ./shell.nix {pkgs = mkPkgs system;};
     });
     packages = import ./nix/packages.nix {inherit inputs mkPkgs;};
+    hjemModules = rlib.mkModule ./hjem;
   };
 }
