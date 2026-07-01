@@ -4,7 +4,7 @@ local rb = require("rootbeer")
 require("modules.presets.shells")
 
 local apps = { "fastfetch", "helix", "zed" }
-local desktop = { "hyprland", "mango", "oxwm", "waybar" }
+local desktop = { "hyprland", "oxwm", "waybar" }
 local terminals = { "kitty" }
 
 function import_items(family, dir)
