@@ -1,4 +1,5 @@
 {
+  "helix_mode": true,
   "remove_trailing_whitespace_on_save": true,
   "format_on_save": "off",
   "agent_buffer_font_size": 16.0,
@@ -36,7 +37,7 @@
       "language_servers": ["nixd"],
     },
   },
-  "vim_mode": true,
+  "vim_mode": false,
   "vim": {
     "toggle_relative_line_numbers": true,
   },
