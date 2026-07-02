@@ -3,10 +3,19 @@
 in {
   hjem.users.michael = {
     packages = [pkgs.fish];
-    files.".profile".source = "${path}/profile";
+    files.".profile" = {
+      source = "${path}/profile";
+      clobber = false;
+    };
     xdg.config.files = {
-      "fish/config.fish".source = "${path}/config.fish";
-      "fish/functions".source = "${path}/functions";
+      "fish/config.fish" = {
+        source = "${path}/config.fish";
+        clobber = false;
+      };
+      "fish/functions" = {
+        source = "${path}/functions";
+        clobber = false;
+      };
     };
   };
 }

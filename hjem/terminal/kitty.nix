@@ -3,6 +3,9 @@
 in {
   hjem.users.michael = {
     packages = [pkgs.kitty];
-    xdg.config.files."kitty/kitty.conf".source = "${path}/kitty.conf";
+    xdg.config.files."kitty/kitty.conf" = {
+      source = "${path}/kitty.conf";
+      clobber = false;
+    };
   };
 }

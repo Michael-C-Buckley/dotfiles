@@ -5,6 +5,7 @@ in {
     "DankMaterialShell/settings.json" = {
       source = "${path}/dms-settings.json";
       type = "copy";
+      clobber = false;
     };
   };
 }

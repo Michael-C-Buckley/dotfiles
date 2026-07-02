@@ -3,6 +3,9 @@
 in {
   hjem.users.michael = {
     packages = [pkgs.zsh];
-    files.".zshrc".source = "${path}/zshrc";
+    files.".zshrc" = {
+      source = "${path}/zshrc";
+      clobber = false;
+    };
   };
 }

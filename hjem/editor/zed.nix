@@ -6,6 +6,7 @@ in {
     xdg.config.files."zed/settings.json" = {
       source = "${path}/settings.json";
       type = "copy";
+      clobber = false;
     };
   };
 }

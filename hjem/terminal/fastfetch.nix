@@ -3,6 +3,9 @@
 in {
   hjem.users.michael = {
     packages = [pkgs.fastfetch];
-    xdg.config.files."fastfetch/config.jsonc".source = "${path}/linux.jsonc";
+    xdg.config.files."fastfetch/config.jsonc" = {
+      source = "${path}/linux.jsonc";
+      clobber = false;
+    };
   };
 }
